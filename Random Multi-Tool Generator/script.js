@@ -515,7 +515,7 @@ class WheelSpinner {
 
     draw() {
         const center = this.canvas.width / 2;
-        const radius = center - 10;
+        const radius = Math.max(center - 10, 20); // Ensure minimum radius of 20px
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         // Detect dark mode
@@ -545,10 +545,16 @@ class WheelSpinner {
                 this.ctx.rotate(i * sliceAngle + sliceAngle / 2 + this.currentRotation);
                 this.ctx.textAlign = 'right';
                 this.ctx.fillStyle = isDark ? '#fffbe7' : '#fff';
-                this.ctx.font = 'bold 32px Inter, Arial, sans-serif';
+
+                // Responsive font size based on canvas size
+                const fontSize = Math.max(Math.min(radius / 8, 32), 12);
+                this.ctx.font = `bold ${fontSize}px Inter, Arial, sans-serif`;
                 this.ctx.shadowColor = isDark ? '#232946' : '#333';
-                this.ctx.shadowBlur = 4;
-                this.ctx.fillText(item, radius - 28, 8);
+                this.ctx.shadowBlur = Math.max(fontSize / 8, 2);
+
+                // Responsive text position
+                const textOffset = Math.max(radius * 0.15, 10);
+                this.ctx.fillText(item, radius - textOffset, fontSize / 4);
                 this.ctx.restore();
             });
         } else {
@@ -560,7 +566,8 @@ class WheelSpinner {
             this.ctx.stroke();
             
             this.ctx.fillStyle = '#666';
-            this.ctx.font = '16px Inter';
+            const emptyFontSize = Math.max(Math.min(radius / 10, 16), 10);
+            this.ctx.font = `${emptyFontSize}px Inter`;
             this.ctx.textAlign = 'center';
             this.ctx.fillText('Add items to spin!', center, center);
         }
@@ -572,7 +579,13 @@ class WheelSpinner {
         this.isSpinning = true;
         this.lastFrameTime = performance.now();
         this.finalAngle = Math.random() * Math.PI * 2;
-        try { spinAudio.currentTime = 0; spinAudio.play(); } catch(e){}
+        // Play spin sound if available
+        if (spinAudio) {
+            try {
+                spinAudio.currentTime = 0;
+                spinAudio.play().catch(() => {}); // Handle play promise rejection
+            } catch(e) {}
+        }
         const animate = (currentTime) => {
             const elapsed = currentTime - this.lastFrameTime;
             const progress = Math.min(elapsed / this.spinDuration, 1);
@@ -590,7 +603,13 @@ class WheelSpinner {
                 requestAnimationFrame(animate);
             } else {
                 this.isSpinning = false;
-                try { winAudio.currentTime = 0; winAudio.play(); } catch(e){}
+                // Play win sound if available
+                if (winAudio) {
+                    try {
+                        winAudio.currentTime = 0;
+                        winAudio.play().catch(() => {}); // Handle play promise rejection
+                    } catch(e) {}
+                }
                 launchConfetti();
                 this.announceResult();
             }
@@ -705,12 +724,50 @@ function launchConfetti() {
 }
 
 // --- Wheel Spin Sound ---
-const spinAudio = new Audio('https://cdn.jsdelivr.net/gh/ste-vg/snd@main/spin-short.mp3');
-const winAudio = new Audio('https://cdn.jsdelivr.net/gh/ste-vg/snd@main/win-ding.mp3');
+let spinAudio = null;
+let winAudio = null;
+
+// Initialize audio with error handling
+try {
+    spinAudio = new Audio('https://cdn.jsdelivr.net/gh/ste-vg/snd@main/spin-short.mp3');
+    winAudio = new Audio('https://cdn.jsdelivr.net/gh/ste-vg/snd@main/win-ding.mp3');
+
+    // Preload audio files
+    spinAudio.preload = 'auto';
+    winAudio.preload = 'auto';
+
+    // Handle audio loading errors
+    spinAudio.addEventListener('error', () => {
+        console.log('Spin audio failed to load, continuing without sound');
+        spinAudio = null;
+    });
+
+    winAudio.addEventListener('error', () => {
+        console.log('Win audio failed to load, continuing without sound');
+        winAudio = null;
+    });
+} catch (e) {
+    console.log('Audio initialization failed, continuing without sound');
+}
 
 // Initialize wheel spinner
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById('wheel-canvas');
+
+    // Set canvas size based on wrapper
+    function resizeCanvas() {
+        const wrapper = canvas.parentElement;
+        const size = Math.min(wrapper.offsetWidth, wrapper.offsetHeight);
+        canvas.width = size;
+        canvas.height = size;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+        wheel.draw();
+    });
+
     const wheel = new WheelSpinner(canvas);
     wheel.draw();
 
