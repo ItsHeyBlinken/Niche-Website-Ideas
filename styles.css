@@ -184,9 +184,9 @@ body {
 
 /* Hero Section */
 .hero {
-    padding: 8rem 2rem 4rem;
+    padding: 6rem 2rem 3rem;
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    min-height: 100vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
 }
@@ -201,10 +201,10 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     color: var(--text-primary);
 }
 
@@ -216,9 +216,9 @@ body {
 }
 
 .hero-description {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.6;
 }
 
@@ -307,7 +307,7 @@ body {
 
 /* Tools Section */
 .tools-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     background: var(--bg-secondary);
 }
 
@@ -320,10 +320,10 @@ body {
 }
 
 .section-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: var(--text-secondary);
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .tools-grid {
@@ -337,7 +337,7 @@ body {
 .tool-card {
     background: var(--bg-card);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 1.5rem;
     box-shadow: var(--shadow-lg);
     transition: all 0.3s ease;
     border: 1px solid var(--border-color);
@@ -416,20 +416,20 @@ body {
 
 /* Features Section */
 .features-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     background: var(--bg-primary);
 }
 
 .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
 .feature-item {
     text-align: center;
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
 }
 
 .feature-icon {
@@ -452,7 +452,7 @@ body {
 
 /* About Section */
 .about-section {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     background: var(--bg-secondary);
 }
 
@@ -495,93 +495,7 @@ body {
     font-size: 0.875rem;
 }
 
-/* Modal Styles */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
-    animation: fadeIn 0.3s ease;
-}
 
-.modal-content {
-    background: var(--bg-card);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-xl);
-    max-width: 500px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: slideUp 0.3s ease;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem 1rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.modal-header h3 {
-    margin: 0;
-    color: var(--text-primary);
-    font-size: 1.25rem;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-secondary);
-    padding: 0.25rem;
-    border-radius: var(--radius-sm);
-    transition: all 0.3s ease;
-}
-
-.modal-close:hover {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-}
-
-.modal-body {
-    padding: 1.5rem 2rem;
-}
-
-.modal-body p {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.modal-footer {
-    padding: 1rem 2rem 1.5rem;
-    display: flex;
-    justify-content: flex-end;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -594,7 +508,8 @@ body {
     }
 
     .hero {
-        padding: 6rem 1rem 2rem;
+        padding: 5rem 1rem 2rem;
+        min-height: 80vh;
     }
 
     .hero-content {
@@ -622,7 +537,7 @@ body {
     .tools-section,
     .features-section,
     .about-section {
-        padding: 4rem 1rem;
+        padding: 3rem 1rem;
     }
 }
 

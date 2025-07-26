@@ -168,7 +168,7 @@
                         </div>
                     </div>
                     <div class="tool-footer">
-                        <button class="btn btn-tool" onclick="showComingSoon('Multi-Tool Generator')">Launch Tool</button>
+                        <a href="Random Multi-Tool Generator/" class="btn btn-tool">Launch Tool</a>
                     </div>
                 </div>
 
@@ -192,7 +192,7 @@
                         </div>
                     </div>
                     <div class="tool-footer">
-                        <button class="btn btn-tool" onclick="showComingSoon('Character Chat')">Start Chatting</button>
+                        <a href="AI Chatbot/" class="btn btn-tool">Start Chatting</a>
                     </div>
                 </div>
             </div>
@@ -253,8 +253,8 @@
                     No accounts needed, no data collected - just pure functionality when you need it.
                 </p>
                 <p class="about-text">
-                    <strong>🚧 Currently in Development:</strong> Our amazing tools are being built and will be available soon!
-                    This homepage gives you a preview of what's coming.
+                    <strong>🎉 Ready to Use:</strong> Both of our amazing tools are now live and ready to help you!
+                    Click the buttons above to start using them right away.
                 </p>
             </div>
         </div>
@@ -350,39 +350,7 @@
             document.body.style.animation = 'fadeInUp 0.6s ease forwards';
         });
 
-        // Coming Soon Modal
-        function showComingSoon(toolName) {
-            const modal = document.createElement('div');
-            modal.className = 'modal-overlay';
-            modal.innerHTML = `
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3>🚀 ${toolName} Coming Soon!</h3>
-                        <button class="modal-close" onclick="closeModal()">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>We're working hard to bring you this amazing tool! It will be available very soon.</p>
-                        <p>In the meantime, check out our other features and stay tuned for updates.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" onclick="closeModal()">Got it!</button>
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(modal);
 
-            // Add click outside to close
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeModal();
-            });
-        }
-
-        function closeModal() {
-            const modal = document.querySelector('.modal-overlay');
-            if (modal) {
-                modal.remove();
-            }
-        }
     </script>
 </body>
 </html>
