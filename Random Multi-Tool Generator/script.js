@@ -757,7 +757,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set canvas size based on wrapper
     function resizeCanvas() {
         const wrapper = canvas.parentElement;
-        const size = Math.min(wrapper.offsetWidth, wrapper.offsetHeight);
+        // Use the wrapper's actual dimensions to fill it completely
+        const size = Math.max(wrapper.offsetWidth, wrapper.offsetHeight);
         canvas.width = size;
         canvas.height = size;
     }
