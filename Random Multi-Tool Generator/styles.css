@@ -16,9 +16,9 @@ body {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 40px 40px 40px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -134,10 +134,11 @@ body {
 .main-content {
     flex: 1;
     background: white;
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    margin-bottom: 20px;
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+    margin-bottom: 32px;
+    font-size: 1.18rem;
 }
 
 .tool-section {
@@ -165,14 +166,14 @@ body {
 }
 
 .tool-header h2 {
-    font-size: 2rem;
+    font-size: 2.4rem;
     color: #667eea;
     margin-bottom: 10px;
 }
 
 .tool-header p {
     color: #666;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
 }
 
 /* Form Elements */
@@ -497,11 +498,11 @@ textarea {
 .preset-btn {
     background: #f8f9fa;
     border: 2px solid #e1e5e9;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 14px 28px;
+    border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    font-size: 1.15rem;
 }
 
 .preset-btn:hover {
@@ -587,8 +588,8 @@ textarea {
 
 .wheel-wrapper {
     position: relative;
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
     margin-bottom: 20px;
 }
 
@@ -645,32 +646,32 @@ textarea {
 /* Wheel Spinner Flex Layout */
 .wheel-flex-layout {
     display: flex;
-    gap: 32px;
+    gap: 40px;
     align-items: flex-start;
     justify-content: center;
 }
 
 .wheel-main {
-    flex: 1 1 340px;
-    min-width: 320px;
-    max-width: 400px;
+    flex: 1 1 500px;
+    min-width: 350px;
+    max-width: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .wheel-sidebar {
-    flex: 0 0 260px;
-    max-width: 320px;
-    min-width: 220px;
+    flex: 0 0 380px;
+    max-width: 420px;
+    min-width: 240px;
     background: #f8f9fa;
-    border-radius: 16px;
-    box-shadow: 0 2px 12px rgba(102,126,234,0.06);
-    padding: 18px 16px 18px 16px;
+    border-radius: 18px;
+    box-shadow: 0 2px 16px rgba(102,126,234,0.08);
+    padding: 32px 24px 32px 24px;
     margin-top: 0;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 26px;
 }
 
 .wheel-input-section {
@@ -681,13 +682,19 @@ textarea {
     margin-top: 18px;
     background: #eef2fa;
     border-radius: 8px;
-    padding: 12px 10px 10px 10px;
+    padding: 16px 12px 12px 12px;
     box-shadow: 0 1px 4px rgba(102,126,234,0.06);
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .save-preset-row {
     display: flex;
     gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
     margin-bottom: 10px;
 }
 
@@ -1022,8 +1029,8 @@ body.dark .wheel-wrapper {
     }
 
     .wheel-wrapper {
-        width: 250px;
-        height: 250px;
+        width: 300px;
+        height: 300px;
     }
     
     .preset-buttons {
@@ -1062,8 +1069,8 @@ body.dark .wheel-wrapper {
     }
     
     .wheel-wrapper {
-        width: 200px;
-        height: 200px;
+        width: 120px;
+        height: 120px;
     }
     
     .add-item-container {

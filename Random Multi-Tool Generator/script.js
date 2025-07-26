@@ -545,10 +545,10 @@ class WheelSpinner {
                 this.ctx.rotate(i * sliceAngle + sliceAngle / 2 + this.currentRotation);
                 this.ctx.textAlign = 'right';
                 this.ctx.fillStyle = isDark ? '#fffbe7' : '#fff';
-                this.ctx.font = 'bold 16px Inter, Arial, sans-serif';
+                this.ctx.font = 'bold 32px Inter, Arial, sans-serif';
                 this.ctx.shadowColor = isDark ? '#232946' : '#333';
                 this.ctx.shadowBlur = 4;
-                this.ctx.fillText(item, radius - 20, 5);
+                this.ctx.fillText(item, radius - 28, 8);
                 this.ctx.restore();
             });
         } else {
