@@ -757,20 +757,59 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set canvas size based on wrapper
     function resizeCanvas() {
         const wrapper = canvas.parentElement;
-        // Use the wrapper's actual dimensions to fill it completely
-        const size = Math.max(wrapper.offsetWidth, wrapper.offsetHeight);
-        canvas.width = size;
-        canvas.height = size;
+
+        // Get computed styles to ensure CSS is applied
+        const computedStyle = window.getComputedStyle(wrapper);
+        const wrapperWidth = parseInt(computedStyle.width) || wrapper.offsetWidth;
+        const wrapperHeight = parseInt(computedStyle.height) || wrapper.offsetHeight;
+
+        // Fallback sizes based on screen width (matching CSS media queries)
+        let fallbackSize = 500; // Desktop default
+        if (window.innerWidth <= 480) {
+            fallbackSize = 200; // Mobile
+        } else if (window.innerWidth <= 768) {
+            fallbackSize = 220; // Tablet
+        }
+
+        // Use wrapper dimensions or fallback
+        const size = Math.max(wrapperWidth, wrapperHeight) || fallbackSize;
+
+        // Always set a valid size
+        if (size > 0) {
+            canvas.width = size;
+            canvas.height = size;
+            canvas.style.width = size + 'px';
+            canvas.style.height = size + 'px';
+
+            // Force a redraw
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, size, size);
+        }
     }
 
-    resizeCanvas();
+    // Initialize wheel immediately with CSS-based sizing
+    const wheel = new WheelSpinner(canvas);
+
+    // Function to initialize canvas
+    function initializeCanvas() {
+        resizeCanvas();
+        wheel.draw();
+    }
+
+    // Force immediate initialization
+    initializeCanvas();
+
+    // Backup initialization after DOM is ready
+    document.addEventListener('DOMContentLoaded', initializeCanvas);
+
+    // Final backup after full page load
+    window.addEventListener('load', initializeCanvas);
+
+    // Handle window resize
     window.addEventListener('resize', () => {
         resizeCanvas();
         wheel.draw();
     });
-
-    const wheel = new WheelSpinner(canvas);
-    wheel.draw();
 
     // Input handling
     const itemInput = document.getElementById('wheel-item-input');
