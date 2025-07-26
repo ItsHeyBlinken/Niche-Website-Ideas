@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Tool Random Generator | Decision Maker, Quotes, Dice & More</title>
+    <meta name="description" content="All-in-one random generator tools: decision maker, quote generator, dice roller, coin flipper, and activity picker. Make decisions and find inspiration!">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">
+                <span class="logo-die" aria-hidden="true">🎲</span>
+                Multi-Tool Generator
+            </h1>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <p class="tagline">Your one-stop shop for random decisions and inspiration</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="decision">
+                <span class="tab-icon">🤔</span>
+                <span class="tab-text">Decision Maker</span>
+            </button>
+            <button class="tab-btn" data-tab="quotes">
+                <span class="tab-icon">💭</span>
+                <span class="tab-text">Quotes</span>
+            </button>
+            <button class="tab-btn" data-tab="dice">
+                <span class="tab-icon">🎲</span>
+                <span class="tab-text">Dice & Coin</span>
+            </button>
+            <button class="tab-btn" data-tab="activities">
+                <span class="tab-icon">🎯</span>
+                <span class="tab-text">Activities</span>
+            </button>
+            <button class="tab-btn" data-tab="wheel">
+                <span class="tab-icon">🎡</span>
+                <span class="tab-text">Wheel Spinner</span>
+            </button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Decision Maker Tool -->
+            <section class="tool-section active" id="decision">
+                <div class="tool-header">
+                    <h2>🤔 Random Decision Maker</h2>
+                    <p>Can't decide? Let us help you choose!</p>
+                </div>
+                
+                <div class="tool-content">
+                    <div class="category-selector">
+                        <label for="decision-category">Choose a category:</label>
+                        <select id="decision-category">
+                            <option value="food">🍕 Food & Restaurants</option>
+                            <option value="activities">🎯 Activities & Hobbies</option>
+                            <option value="movies">🎬 Movies & Shows</option>
+                            <option value="custom">✏️ Custom Options</option>
+                        </select>
+                    </div>
+
+                    <div class="custom-options" id="custom-options" style="display: none;">
+                        <textarea id="custom-list" placeholder="Enter your options, one per line..."></textarea>
+                        <small>Enter each option on a new line</small>
+                    </div>
+
+                    <button class="generate-btn" id="decision-btn">
+                        <span class="btn-text">Make My Decision!</span>
+                        <span class="btn-spinner" style="display: none;">🎲</span>
+                    </button>
+
+                    <div class="result-display" id="decision-result" aria-live="polite"></div>
+                </div>
+            </section>
+
+            <!-- Quote Generator Tool -->
+            <section class="tool-section" id="quotes">
+                <div class="tool-header">
+                    <h2>💭 Random Quote Generator</h2>
+                    <p>Find inspiration with wisdom from great minds</p>
+                </div>
+                
+                <div class="tool-content">
+                    <div class="category-selector">
+                        <label for="quote-category">Quote category:</label>
+                        <select id="quote-category">
+                            <option value="all">All Categories</option>
+                            <option value="motivation">💪 Motivation</option>
+                            <option value="wisdom">🧠 Wisdom</option>
+                            <option value="success">🏆 Success</option>
+                            <option value="life">🌟 Life</option>
+                            <option value="happiness">😊 Happiness</option>
+                        </select>
+                    </div>
+
+                    <button class="generate-btn" id="quote-btn">
+                        <span class="btn-text">Get Random Quote</span>
+                        <span class="btn-spinner" style="display: none;">💭</span>
+                    </button>
+
+                    <div class="result-display quote-result" id="quote-result" aria-live="polite"></div>
+                    
+                    <div class="quote-actions" id="quote-actions" style="display: none;">
+                        <button class="action-btn" id="favorite-quote">⭐ Favorite</button>
+                        <button class="action-btn" id="share-quote">📤 Share</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dice & Coin Tool -->
+            <section class="tool-section" id="dice">
+                <div class="tool-header">
+                    <h2>🎲 Dice Roller & Coin Flipper</h2>
+                    <p>Roll dice or flip coins for quick random results</p>
+                </div>
+                
+                <div class="tool-content">
+                    <div class="dice-coin-tabs">
+                        <button class="sub-tab-btn active" data-subtab="dice-roll">🎲 Dice Roller</button>
+                        <button class="sub-tab-btn" data-subtab="coin-flip">🪙 Coin Flipper</button>
+                    </div>
+
+                    <!-- Dice Roller -->
+                    <div class="sub-tool active" id="dice-roll">
+                        <div class="dice-controls">
+                            <label for="dice-count">Number of dice:</label>
+                            <select id="dice-count">
+                                <option value="1">1 Die</option>
+                                <option value="2">2 Dice</option>
+                            </select>
+                        </div>
+
+                        <button class="generate-btn" id="dice-btn">
+                            <span class="btn-text">Roll Dice!</span>
+                            <span class="btn-spinner" style="display: none;">🎲</span>
+                        </button>
+
+                        <div class="dice-display" id="dice-display" aria-live="polite"></div>
+                    </div>
+
+                    <!-- Coin Flipper -->
+                    <div class="sub-tool" id="coin-flip">
+                        <button class="generate-btn" id="coin-btn">
+                            <span class="btn-text">Flip Coin!</span>
+                            <span class="btn-spinner" style="display: none;">🪙</span>
+                        </button>
+
+                        <div class="coin-display" id="coin-display" aria-live="polite"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Activity Picker Tool -->
+            <section class="tool-section" id="activities">
+                <div class="tool-header">
+                    <h2>🎯 Random Activity Picker</h2>
+                    <p>Discover new things to do and beat boredom!</p>
+                </div>
+
+                <div class="tool-content">
+                    <div class="category-selector">
+                        <label for="activity-category">Activity type:</label>
+                        <select id="activity-category">
+                            <option value="all">All Activities</option>
+                            <option value="indoor">🏠 Indoor</option>
+                            <option value="outdoor">🌳 Outdoor</option>
+                            <option value="creative">🎨 Creative</option>
+                            <option value="physical">💪 Physical</option>
+                            <option value="social">👥 Social</option>
+                            <option value="learning">📚 Learning</option>
+                        </select>
+                    </div>
+
+                    <button class="generate-btn" id="activity-btn">
+                        <span class="btn-text">Suggest Activity!</span>
+                        <span class="btn-spinner" style="display: none;">🎯</span>
+                    </button>
+
+                    <div class="result-display" id="activity-result" aria-live="polite"></div>
+
+                    <div class="activity-actions" id="activity-actions" style="display: none;">
+                        <button class="action-btn" id="favorite-activity">⭐ Favorite</button>
+                        <button class="action-btn" id="skip-activity">⏭️ Skip</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Wheel Spinner Tool -->
+            <section class="tool-section" id="wheel">
+                <div class="tool-header">
+                    <h2>🎡 Wheel Spinner</h2>
+                    <p>Add your options and spin the wheel to make a choice!</p>
+                </div>
+
+                <div class="tool-content wheel-flex-layout">
+                    <div class="wheel-main">
+                        <div class="wheel-container">
+                            <div class="wheel-wrapper">
+                                <div class="wheel-pointer">▼</div>
+                                <canvas id="wheel-canvas" width="500" height="500"></canvas>
+                                <div class="wheel-center">
+                                    <div class="wheel-center-dot"></div>
+                                </div>
+                            </div>
+                            <button class="generate-btn wheel-spin-btn" id="wheel-spin-btn" disabled>
+                                <span class="btn-text">🎡 Spin the Wheel!</span>
+                                <span class="btn-spinner" style="display: none;">🌀</span>
+                            </button>
+                            <div class="result-display" id="wheel-result" aria-live="polite"></div>
+                            <div class="wheel-actions" id="wheel-actions" style="display: none;">
+                                <button class="action-btn" id="spin-again-btn">🔄 Spin Again</button>
+                                <button class="action-btn" id="save-wheel-btn">💾 Save Wheel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <aside class="wheel-sidebar">
+                        <div class="wheel-input-section">
+                            <div class="input-group">
+                                <label for="wheel-item-input">Add items to the wheel:</label>
+                                <div class="add-item-container">
+                                    <input type="text" id="wheel-item-input" placeholder="Enter an option..." maxlength="30">
+                                    <button class="add-item-btn" id="add-item-btn">➕ Add</button>
+                                </div>
+                            </div>
+                            <div class="quick-add-section">
+                                <label>Quick add presets:</label>
+                                <div class="preset-buttons">
+                                    <button class="preset-btn" data-preset="yesno">Yes/No</button>
+                                    <button class="preset-btn" data-preset="numbers">Numbers 1-10</button>
+                                    <button class="preset-btn" data-preset="colors">Colors</button>
+                                    <button class="preset-btn" data-preset="food">Food Options</button>
+                                </div>
+                            </div>
+                            <div class="wheel-items-list" id="wheel-items-list">
+                                <div class="items-header">
+                                    <span>Wheel Items (<span id="item-count">0</span>)</span>
+                                    <button class="clear-all-btn" id="clear-all-btn">🗑️ Clear All</button>
+                                </div>
+                                <div class="items-container" id="items-container">
+                                    <p class="no-items">No items added yet. Add some options above!</p>
+                                </div>
+                            </div>
+                            <div class="wheel-presets-user">
+                                <label for="save-preset-name">Save/Load My Presets:</label>
+                                <div class="save-preset-row">
+                                    <input type="text" id="save-preset-name" placeholder="Preset name..." maxlength="20">
+                                    <button class="add-item-btn" id="save-preset-btn">💾 Save</button>
+                                </div>
+                                <div class="user-presets-list" id="user-presets-list">
+                                    <!-- User presets will be listed here -->
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2025 Multi-Tool Generator. Made with ❤️ for decision-makers everywhere.</p>
+            <div class="footer-links">
+                <a href="#" id="favorites-link">⭐ My Favorites</a>
+                <a href="#" id="about-link">ℹ️ About</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Favorites Modal -->
+    <div class="modal" id="favorites-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⭐ My Favorites</h3>
+                <button class="close-btn" id="close-favorites">&times;</button>
+            </div>
+            <div class="modal-body" id="favorites-content">
+                <p>No favorites saved yet. Start using the tools and save your favorites!</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
