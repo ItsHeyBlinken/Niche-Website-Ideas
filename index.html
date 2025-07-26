@@ -8,6 +8,21 @@
     <meta name="keywords" content="free online tools, random generator, decision maker, quote generator, dice roller, coin flipper, activity picker, wheel spinner, AI chatbot, fun tools, productivity tools, random tools, online generators">
     <meta name="author" content="Online Tools Hub">
     <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    <meta name="theme-color" content="#667eea">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="ToolsHub">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -46,7 +61,33 @@
             "@type": "SearchAction",
             "target": "/?q={search_term_string}",
             "query-input": "required name=search_term_string"
-        }
+        },
+        "mainEntity": [
+            {
+                "@type": "SoftwareApplication",
+                "name": "Multi-Tool Random Generator",
+                "description": "All-in-one random generator toolkit with decision makers, quote generators, dice rollers, activity pickers, and wheel spinners",
+                "applicationCategory": "Utility",
+                "operatingSystem": "Web Browser",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            },
+            {
+                "@type": "SoftwareApplication",
+                "name": "Funny Character Chat Simulator",
+                "description": "Chat with hilarious AI personalities including pirates, cavemen, cranky grandpas, and valley girls",
+                "applicationCategory": "Entertainment",
+                "operatingSystem": "Web Browser",
+                "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                }
+            }
+        ]
     }
     </script>
 </head>
@@ -127,7 +168,7 @@
                         </div>
                     </div>
                     <div class="tool-footer">
-                        <a href="Random Multi-Tool Generator/" class="btn btn-tool">Launch Tool</a>
+                        <button class="btn btn-tool" onclick="showComingSoon('Multi-Tool Generator')">Launch Tool</button>
                     </div>
                 </div>
 
@@ -139,8 +180,8 @@
                     </div>
                     <div class="tool-content">
                         <p class="tool-description">
-                            Chat with hilarious AI personalities! Talk to pirates, cavemen, cranky grandpas, 
-                            and valley girls. Each character has unique responses and personality traits 
+                            Chat with hilarious AI personalities! Talk to pirates, cavemen, cranky grandpas,
+                            and valley girls. Each character has unique responses and personality traits
                             for endless entertainment.
                         </p>
                         <div class="tool-features">
@@ -151,7 +192,7 @@
                         </div>
                     </div>
                     <div class="tool-footer">
-                        <a href="AI Chatbot/" class="btn btn-tool">Start Chatting</a>
+                        <button class="btn btn-tool" onclick="showComingSoon('Character Chat')">Start Chatting</button>
                     </div>
                 </div>
             </div>
@@ -208,8 +249,12 @@
                     to have a laugh with our AI characters, we've got the perfect tool for you.
                 </p>
                 <p class="about-text">
-                    All our tools are completely free, work offline, and respect your privacy. 
+                    All our tools are completely free, work offline, and respect your privacy.
                     No accounts needed, no data collected - just pure functionality when you need it.
+                </p>
+                <p class="about-text">
+                    <strong>🚧 Currently in Development:</strong> Our amazing tools are being built and will be available soon!
+                    This homepage gives you a preview of what's coming.
                 </p>
             </div>
         </div>
@@ -230,6 +275,29 @@
 
     <!-- Scripts -->
     <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.querySelector('.theme-icon');
+        const body = document.body;
+
+        // Check for saved theme preference or default to light mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -253,6 +321,68 @@
                 header.classList.remove('scrolled');
             }
         });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        // Add scroll reveal to elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealElements = document.querySelectorAll('.tool-card, .feature-item, .about-content');
+            revealElements.forEach(el => {
+                el.classList.add('scroll-reveal');
+                observer.observe(el);
+            });
+        });
+
+        // Add loading animation to page
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.animation = 'fadeInUp 0.6s ease forwards';
+        });
+
+        // Coming Soon Modal
+        function showComingSoon(toolName) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>🚀 ${toolName} Coming Soon!</h3>
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>We're working hard to bring you this amazing tool! It will be available very soon.</p>
+                        <p>In the meantime, check out our other features and stay tuned for updates.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" onclick="closeModal()">Got it!</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+
+            // Add click outside to close
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal-overlay');
+            if (modal) {
+                modal.remove();
+            }
+        }
     </script>
 </body>
 </html>
