@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Password Generator | Strong, Secure Passwords</title>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="../" class="nav-home">
+                <span class="nav-icon">🛠️</span>
+                <span class="nav-text">ToolsHub</span>
+            </a>
+                               <div class="nav-breadcrumb">
+                       <span class="breadcrumb-separator">›</span>
+                       <span class="current-tool">Password Generator</span>
+                   </div>
+                   <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                       <span class="theme-icon">🌙</span>
+                   </button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-icons">
+                <span class="header-icon">🔐</span>
+                <span class="header-icon">🔒</span>
+            </div>
+            <h1>Password Generator</h1>
+            <p>Create strong, secure passwords for all your accounts!</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="password">🔐 Password Generator</button>
+                <button class="tab-btn" data-tab="username">👤 Username Generator</button>
+            </div>
+
+            <!-- Password Generator Tab -->
+            <div class="tab-content active" id="password-tab">
+                <!-- Password Display -->
+                <div class="password-display">
+                    <div class="password-field">
+                        <input type="text" id="generatedPassword" readonly placeholder="Your password will appear here...">
+                        <button id="copyBtn" class="copy-btn" title="Copy to clipboard">
+                            <span class="copy-icon">📋</span>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span class="strength-text" id="strengthText">Generate a password to see strength</span>
+                    </div>
+                </div>
+
+                <!-- Password Options -->
+                <div class="options-section">
+                    <h3>Password Options</h3>
+                    
+                    <div class="option-group">
+                        <label class="option-label">
+                            <input type="range" id="lengthSlider" min="8" max="64" value="16">
+                            <span class="option-text">Length: <span id="lengthValue">16</span> characters</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="uppercase" checked>
+                            <span class="checkbox-text">Uppercase letters (A-Z)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="lowercase" checked>
+                            <span class="checkbox-text">Lowercase letters (a-z)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="numbers" checked>
+                            <span class="checkbox-text">Numbers (0-9)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="symbols" checked>
+                            <span class="checkbox-text">Symbols (!@#$%^&*)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="excludeSimilar">
+                            <span class="checkbox-text">Exclude similar characters (l, 1, I, O, 0)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="excludeAmbiguous">
+                            <span class="checkbox-text">Exclude ambiguous characters ({}, [], |, \)</span>
+                        </label>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="generateBtn" class="generate-btn">
+                            <span class="btn-text">🔐 Generate Password</span>
+                            <span class="btn-spinner" style="display: none;">⚡</span>
+                        </button>
+                        
+                        <button id="generateMultipleBtn" class="secondary-btn">
+                            <span class="btn-text">🎲 Generate Multiple</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Password History -->
+                <div class="history-section">
+                    <div class="history-header">
+                        <h3>Recent Passwords</h3>
+                        <button id="clearHistoryBtn" class="clear-btn">🗑️ Clear History</button>
+                    </div>
+                    <div class="password-list" id="passwordList">
+                        <p class="no-passwords">No passwords generated yet. Generate your first password above!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Username Generator Tab -->
+            <div class="tab-content" id="username-tab">
+                <!-- Username Display -->
+                <div class="username-display">
+                    <div class="username-field">
+                        <input type="text" id="generatedUsername" readonly placeholder="Your username will appear here...">
+                        <button id="copyUsernameBtn" class="copy-btn" title="Copy to clipboard">
+                            <span class="copy-icon">📋</span>
+                        </button>
+                    </div>
+                    <div class="username-availability">
+                        <span class="availability-text" id="availabilityText">Generate a username to check availability</span>
+                    </div>
+                </div>
+
+                <!-- Username Options -->
+                <div class="options-section">
+                    <h3>Username Options</h3>
+                    
+                    <div class="option-group">
+                        <label class="option-label">
+                            <input type="range" id="usernameLengthSlider" min="3" max="20" value="8">
+                            <span class="option-text">Length: <span id="usernameLengthValue">8</span> characters</span>
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="usernameLowercase" checked>
+                            <span class="checkbox-text">Lowercase letters (a-z)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="usernameNumbers" checked>
+                            <span class="checkbox-text">Numbers (0-9)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="usernameUnderscores">
+                            <span class="checkbox-text">Underscores (_)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="usernameDots">
+                            <span class="checkbox-text">Dots (.)</span>
+                        </label>
+                        
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="usernameHyphens">
+                            <span class="checkbox-text">Hyphens (-)</span>
+                        </label>
+                    </div>
+
+                    <div class="username-style-group">
+                        <h4>Username Style</h4>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="usernameStyle" value="random" checked>
+                                <span class="radio-text">🎲 Random</span>
+                            </label>
+                            
+                            <label class="radio-label">
+                                <input type="radio" name="usernameStyle" value="adjective-noun">
+                                <span class="radio-text">🌈 Adjective + Noun</span>
+                            </label>
+                            
+                            <label class="radio-label">
+                                <input type="radio" name="usernameStyle" value="name-number">
+                                <span class="radio-text">👤 Name + Number</span>
+                            </label>
+                            
+                            <label class="radio-label">
+                                <input type="radio" name="usernameStyle" value="gaming">
+                                <span class="radio-text">🎮 Gaming Style</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="generateUsernameBtn" class="generate-btn">
+                            <span class="btn-text">👤 Generate Username</span>
+                            <span class="btn-spinner" style="display: none;">⚡</span>
+                        </button>
+                        
+                        <button id="generateMultipleUsernamesBtn" class="secondary-btn">
+                            <span class="btn-text">🎲 Generate Multiple</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Username History -->
+                <div class="history-section">
+                    <div class="history-header">
+                        <h3>Recent Usernames</h3>
+                        <button id="clearUsernameHistoryBtn" class="clear-btn">🗑️ Clear History</button>
+                    </div>
+                    <div class="username-list" id="usernameList">
+                        <p class="no-usernames">No usernames generated yet. Generate your first username above!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Tips -->
+            <div class="tips-section">
+                <h3>💡 Security Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <span class="tip-icon">🔒</span>
+                        <p>Use at least 12 characters for better security</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">🔄</span>
+                        <p>Use different passwords for each account</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">📱</span>
+                        <p>Consider using a password manager</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">👤</span>
+                        <p>Choose unique usernames that aren't easily guessable</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2025 Password Generator. Made with ❤️ for security!</p>
+        </footer>
+    </div>
+
+    <!-- Multiple Passwords Modal -->
+    <div class="modal" id="multipleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎲 Generate Multiple Passwords</h3>
+                <button class="close-btn" id="closeMultiple">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-options">
+                    <label>
+                        Number of passwords:
+                        <input type="number" id="passwordCount" min="2" max="20" value="5">
+                    </label>
+                </div>
+                <div class="multiple-passwords" id="multiplePasswords"></div>
+                <div class="modal-actions">
+                    <button id="copyAllBtn" class="copy-all-btn">📋 Copy All</button>
+                    <button id="generateNewBtn" class="generate-new-btn">🔄 Generate New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Multiple Usernames Modal -->
+    <div class="modal" id="multipleUsernamesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>🎲 Generate Multiple Usernames</h3>
+                <button class="close-btn" id="closeMultipleUsernames">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-options">
+                    <label>
+                        Number of usernames:
+                        <input type="number" id="usernameCount" min="2" max="20" value="5">
+                    </label>
+                </div>
+                <div class="multiple-usernames" id="multipleUsernames"></div>
+                <div class="modal-actions">
+                    <button id="copyAllUsernamesBtn" class="copy-all-btn">📋 Copy All</button>
+                    <button id="generateNewUsernamesBtn" class="generate-new-btn">🔄 Generate New</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
