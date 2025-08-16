@@ -6,6 +6,12 @@
     --button-bg: #dde4ec;
     --button-hover: #cbd5e0;
     --highlight-color: #85888d;
+    --border-color: #cbd5e0;
+    
+    /* Theme toggle variables */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .digital-timer {
@@ -16,22 +22,28 @@
     color: var(--text-color);
 }
 
+/* Dark Mode Colors */
 [data-theme="dark"] {
-    --bg-color: #2b3545; /* Gunmetal base */
-    --text-color: #ffffff;
-    --button-bg: #3d4b5f; /* Lighter gunmetal for buttons */
-    --button-hover: #c6c8cc; /* Even lighter for hover */
-    --highlight-color: #b2b3b6; /* Subtle highlight color */
+    --bg-color: #1e293b; /* Darker background for better contrast */
+    --text-color: #f8fafc; /* Brighter text for better readability */
+    --button-bg: #475569; /* Better button contrast */
+    --button-hover: #64748b; /* Improved hover state */
+    --highlight-color: #cbd5e1; /* Better highlight visibility */
+    --border-color: #475569;
+    
+    /* Dark mode shadows */
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
 }
 
 /* Add subtle gradient to dark mode background */
 [data-theme="dark"] body {
-    background: linear-gradient(145deg, #2b3545, #333d4d);
+    background: linear-gradient(145deg, #1e293b, #334155);
     color: var(--text-color);
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -40,16 +52,17 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: all 0.3s ease;
-    padding-top: 2rem;
 }
 
 .timer-container {
     text-align: center;
-    padding: 20px;
+    padding: 2rem;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
+    margin: 0 auto;
+    background-color: var(--bg-color);
 }
 
 .timer-type {
@@ -141,6 +154,39 @@ body {
     opacity: 0.7;
 }
 
+.task-item.active {
+    border: 2px solid var(--highlight-color);
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+}
+
+.task-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+}
+
+.task-text {
+    flex: 1;
+}
+
+.pomodoro-count {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.task-actions {
+    display: flex;
+    gap: 5px;
+}
+
+.task-actions button {
+    padding: 5px 8px;
+    font-size: 0.8em;
+    min-width: auto;
+}
+
 .button-container {
     display: flex;
     flex-wrap: wrap;
@@ -159,11 +205,6 @@ button {
     color: var(--text-color);
     transition: all 0.3s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] button {
-    background: linear-gradient(145deg, #3d4b5f, #364354);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 button:hover {
@@ -261,8 +302,61 @@ button:hover {
     margin-top: 20px;
 }
 
+/* Theme Toggle Button */
+.theme-toggle {
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    margin: 20px auto;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.theme-toggle:active {
+    transform: translateY(0);
+}
+
+.theme-icon {
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover .theme-icon {
+    transform: scale(1.1);
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 600px) {
+    .nav-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    
+    .app-header h1 {
+        font-size: 2rem;
+    }
+    
+    .app-header p {
+        font-size: 1rem;
+    }
+    
+    .timer-container {
+        padding: 1rem;
+        margin: 0 1rem;
+    }
+    
     .timer {
         font-size: 3em;
     }
@@ -275,4 +369,91 @@ button:hover {
         width: 100%;
         margin: 5px 0;
     }
+}
+
+/* Top Navigation */
+.top-nav {
+    background: var(--primary-gradient);
+    padding: 1rem 0;
+    box-shadow: var(--shadow-md);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-home {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.nav-home:hover {
+    opacity: 0.9;
+}
+
+.nav-icon {
+    font-size: 1.5rem;
+}
+
+.nav-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.current-tool {
+    font-weight: 500;
+}
+
+/* App Container */
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* App Header */
+.app-header {
+    text-align: center;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.app-header p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* App Footer */
+.app-footer {
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-color);
+    opacity: 0.8;
 }

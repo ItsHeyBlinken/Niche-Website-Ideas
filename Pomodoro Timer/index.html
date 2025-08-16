@@ -6,79 +6,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <title>Pomodoro Timer</title>
 </head>
 <body>
-    <div class="timer-container">
-        <div class="timer-type">Work Time</div>
-        <div class="timer-wrapper">
-            <canvas id="timerCanvas" width="300" height="300"></canvas>
-        </div>
-        <div class="digital-timer" id="timer">25:00</div>
-        <div class="button-container">
-            <button id="startBtn" onclick="startTimer()">Start</button>
-            <button id="resetBtn" onclick="resetTimer()">Reset</button>
-            <button id="shortBreakBtn" onclick="startShortBreak()">Short Break</button>
-            <button id="longBreakBtn" onclick="startLongBreak()">Long Break</button>
-            <button id="resumeWorkBtn" onclick="resumeWork()" style="display: none;">Resume Work</button>
-        </div>
-        
-        <div class="task-section">
-            <div class="task-header">
-                <h3>Tasks</h3>
-                <button id="addTaskBtn" onclick="toggleTaskInput()">+ Add Task</button>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="../" class="nav-home">
+                <span class="nav-icon">🛠️</span>
+                <span class="nav-text">ToolsHub</span>
+            </a>
+            <div class="nav-breadcrumb">
+                <span class="breadcrumb-separator">›</span>
+                <span class="current-tool">Pomodoro Timer</span>
             </div>
-            <div id="taskInputContainer" class="hidden">
-                <input type="text" id="taskInput" placeholder="Enter task...">
-                <button onclick="addTask()">Add</button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>⏰ Pomodoro Timer</h1>
+            <p>Boost your productivity with focused work sessions!</p>
+        </header>
+
+        <div class="timer-container">
+            <div class="timer-type">Work Time</div>
+            <div class="timer-wrapper">
+                <canvas id="timerCanvas" width="300" height="300"></canvas>
             </div>
-            <ul id="taskList" class="task-list"></ul>
+            <div class="digital-timer" id="timer">25:00</div>
+            <div class="button-container">
+                <button id="startBtn" onclick="startTimer()">Start</button>
+                <button id="resetBtn" onclick="resetTimer()">Reset</button>
+                <button id="shortBreakBtn" onclick="startShortBreak()">Short Break</button>
+                <button id="longBreakBtn" onclick="startLongBreak()">Long Break</button>
+                <button id="resumeWorkBtn" onclick="resumeWork()" style="display: none;">Resume Work</button>
+            </div>
+            
+            <div class="task-section">
+                <div class="task-header">
+                    <h3>Tasks</h3>
+                    <button id="addTaskBtn" onclick="toggleTaskInput()">+ Add Task</button>
+                </div>
+                <div id="taskInputContainer" class="hidden">
+                    <input type="text" id="taskInput" placeholder="Enter task...">
+                    <button onclick="addTask()">Add</button>
+                </div>
+                <ul id="taskList" class="task-list"></ul>
+            </div>
+
+            <div class="settings">
+                <button id="settingsBtn" onclick="toggleSettings()">⚙️ Settings</button>
+                <div id="settingsPanel" class="settings-panel hidden">
+                    <div class="setting-item">
+                        <label for="workTime">Work Time (minutes):</label>
+                        <input type="number" id="workTime" min="1" max="60" value="25">
+                    </div>
+                    <div class="setting-item">
+                        <label for="shortBreakTime">Short Break (minutes):</label>
+                        <input type="number" id="shortBreakTime" min="1" max="30" value="5">
+                    </div>
+                    <div class="setting-item">
+                        <label for="longBreakTime">Long Break (minutes):</label>
+                        <input type="number" id="longBreakTime" min="1" max="60" value="15">
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats">
+                <div class="stats-header">
+                    <h3>Statistics</h3>
+                    <select id="statsView" onchange="updateStatsView()">
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
+                <div class="stats-details">
+                    <div class="stat-item">
+                        <div class="stat-label">Focus Time</div>
+                        <div class="stat-value"><span id="focusTime">0</span> min</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Completed Tasks</div>
+                        <div class="stat-value"><span id="completedTasks">0</span></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-label">Pomodoro Cycles</div>
+                        <div class="stat-value"><span id="cycleCount">0</span></div>
+                    </div>
+                </div>
+                <canvas id="statsChart" width="280" height="150"></canvas>
+            </div>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                <span class="theme-icon">🌙</span>
+            </button>
         </div>
 
-        <div class="settings">
-            <button id="settingsBtn" onclick="toggleSettings()">⚙️ Settings</button>
-            <div id="settingsPanel" class="settings-panel hidden">
-                <div class="setting-item">
-                    <label for="workTime">Work Time (minutes):</label>
-                    <input type="number" id="workTime" min="1" max="60" value="25">
-                </div>
-                <div class="setting-item">
-                    <label for="shortBreakTime">Short Break (minutes):</label>
-                    <input type="number" id="shortBreakTime" min="1" max="30" value="5">
-                </div>
-                <div class="setting-item">
-                    <label for="longBreakTime">Long Break (minutes):</label>
-                    <input type="number" id="longBreakTime" min="1" max="60" value="15">
-                </div>
-            </div>
-        </div>
-
-        <div class="stats">
-            <div class="stats-header">
-                <h3>Statistics</h3>
-                <select id="statsView" onchange="updateStatsView()">
-                    <option value="today">Today</option>
-                    <option value="week">This Week</option>
-                    <option value="month">This Month</option>
-                </select>
-            </div>
-            <div class="stats-details">
-                <div class="stat-item">
-                    <div class="stat-label">Focus Time</div>
-                    <div class="stat-value"><span id="focusTime">0</span> min</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Completed Tasks</div>
-                    <div class="stat-value"><span id="completedTasks">0</span></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Pomodoro Cycles</div>
-                    <div class="stat-value"><span id="cycleCount">0</span></div>
-                </div>
-            </div>
-            <canvas id="statsChart" width="280" height="150"></canvas>
-        </div>
-        <button id="themeToggle" onclick="toggleTheme()">Toggle Theme</button>
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2025 Pomodoro Timer. Made with ❤️ for productivity!</p>
+        </footer>
     </div>
     <script src="script.js"></script>
 </body>

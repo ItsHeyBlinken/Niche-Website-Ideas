@@ -234,7 +234,7 @@ function updateStatsChart(view) {
         ctx.fillRect(x, y, barWidth, barHeight);
         
         ctx.fillStyle = '#666';
-        ctx.font = '12px Arial';
+        ctx.font = '12px Inter, Arial, sans-serif';
         ctx.fillText(data.labels[index], x, ctx.canvas.height - 5);
     });
 }
@@ -465,14 +465,14 @@ function drawProgress() {
     const totalSeconds = getCurrentModeTime() * 60;
     const currentSeconds = minutes * 60 + seconds;
     const progress = currentSeconds / totalSeconds;
-    const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+    const isDarkMode = document.body.getAttribute('data-theme') === 'dark';
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw background circle
     ctx.beginPath();
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
-    ctx.strokeStyle = isDarkMode ? 'rgba(255, 255, 255, 0.2)' : 'rgba(200, 200, 200, 0.2)';
+    ctx.strokeStyle = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(200, 200, 200, 0.2)';
     ctx.lineWidth = 5;
     ctx.stroke();
 
@@ -487,19 +487,21 @@ function drawProgress() {
         const endX = centerX + radius * Math.cos(angle);
         const endY = centerY + radius * Math.sin(angle);
         
-    ctx.beginPath();
-    ctx.moveTo(startX, startY);
-    ctx.lineTo(endX, endY);
-    ctx.strokeStyle = isDarkMode ? '#ffffff' : '#2d3748';
-    ctx.lineWidth = isMainMark ? 4 : 2;
-    ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        // Improved contrast for dark mode
+        ctx.strokeStyle = isDarkMode ? '#e2e8f0' : '#2d3748';
+        ctx.lineWidth = isMainMark ? 4 : 2;
+        ctx.stroke();
 
         if (isMainMark) {
             const numberRadius = radius - 35;
             const numberX = centerX + numberRadius * Math.cos(angle);
             const numberY = centerY + numberRadius * Math.sin(angle);
-            ctx.font = 'bold 24px Arial';
-            ctx.fillStyle = isDarkMode ? '#ffffff' : '#2d3748';
+            ctx.font = 'bold 24px Inter, Arial, sans-serif';
+            // Improved contrast for dark mode numbers
+            ctx.fillStyle = isDarkMode ? '#f1f5f9' : '#2d3748';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             const number = ((i / 3 * 15) || 60);
@@ -527,7 +529,8 @@ function drawProgress() {
         centerX + radius * 0.7 * Math.cos(minuteAngle),
         centerY + radius * 0.7 * Math.sin(minuteAngle)
     );
-    ctx.strokeStyle = isDarkMode ? '#ffffff' : '#2d3748';
+    // Improved contrast for dark mode minute hand
+    ctx.strokeStyle = isDarkMode ? '#f8fafc' : '#2d3748';
     ctx.lineWidth = 4;
     ctx.stroke();
 
@@ -556,10 +559,6 @@ function getCurrentModeTime() {
         case 'longBreak': return LONG_BREAK;
         default: return WORK_TIME;
     }
-}
-
-function toggleTheme() {
-    document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
 }
 
 function toggleSettings() {
@@ -600,7 +599,6 @@ document.getElementById('longBreakTime').addEventListener('change', function(e) 
     LONG_BREAK = parseInt(e.target.value);
     if (currentMode === 'longBreak') resetTimer();
 });
-    ctx.stroke();
 
 // Event Listeners
 document.getElementById('taskInput')?.addEventListener('keypress', (e) => {
@@ -613,3 +611,28 @@ document.getElementById('taskInput')?.addEventListener('keypress', (e) => {
 loadData();
 drawProgress();
 updateStatsView();
+
+// Theme integration with main site
+const themeToggle = document.getElementById('theme-toggle');
+const themeIcon = document.querySelector('.theme-icon');
+
+// Check for saved theme preference or default to light mode
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.body.setAttribute('data-theme', currentTheme);
+updateThemeIcon(currentTheme);
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    document.body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateThemeIcon(newTheme);
+    
+    // Redraw the timer canvas when theme changes
+    drawProgress();
+});
+
+function updateThemeIcon(theme) {
+    themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
