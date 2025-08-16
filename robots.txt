@@ -1,0 +1,30 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://freetools.bytesbyblinken.com/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Block access to admin areas (if any exist in future)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow all tool directories
+Allow: /Pomodoro Timer/
+Allow: /Password Generator/
+Allow: /QR Code Generator/
+Allow: /Random Multi-Tool Generator/
+Allow: /AI Chatbot/

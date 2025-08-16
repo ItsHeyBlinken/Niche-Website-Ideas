@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Main Page -->
+    <url>
+        <loc>https://freetools.bytesbyblinken.com/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Pomodoro Timer -->
+    <url>
+        <loc>https://freetools.bytesbyblinken.com/Pomodoro Timer/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Password Generator -->
+    <url>
+        <loc>https://freetools.bytesbyblinken.com/Password Generator/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- QR Code Generator -->
+    <url>
+        <loc>https://freetools.bytesbyblinken.com/QR Code Generator/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Random Multi-Tool Generator -->
+    <url>
+        <loc>https://freetools.bytesbyblinken.com/Random Multi-Tool Generator/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- AI Chatbot -->
+    <url>
+        <loc>https://freetools.bytesbyblinken.com/AI Chatbot/</loc>
+        <lastmod>2024-01-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+</urlset>
