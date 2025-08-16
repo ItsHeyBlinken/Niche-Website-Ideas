@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>QR Code Generator | Create Custom QR Codes</title>
+    <meta name="description" content="Generate custom QR codes for URLs, text, contact info, WiFi, and more. Mobile-friendly QR code generator with download options.">
+    <meta name="keywords" content="QR code generator, QR codes, mobile QR, custom QR, download QR">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="QR Code Generator | Create Custom QR Codes">
+    <meta property="og:description" content="Generate custom QR codes for URLs, text, contact info, WiFi, and more. Mobile-friendly QR code generator with download options.">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:title" content="QR Code Generator | Create Custom QR Codes">
+    <meta name="twitter:description" content="Generate custom QR codes for URLs, text, contact info, WiFi, and more. Mobile-friendly QR code generator with download options.">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "QR Code Generator",
+        "description": "Generate custom QR codes for URLs, text, contact info, WiFi, and more",
+        "url": "https://toolshub.com/qr-generator",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser"
+    }
+    </script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="../" class="nav-home">
+                <span class="nav-icon">🛠️</span>
+                <span class="nav-text">ToolsHub</span>
+            </a>
+            <div class="nav-breadcrumb">
+                <span class="breadcrumb-separator">›</span>
+                <span class="current-tool">QR Code Generator</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-icons">
+                <span class="header-icon">📱</span>
+                <span class="header-icon">🔗</span>
+            </div>
+            <h1>QR Code Generator</h1>
+            <p>Create custom QR codes for URLs, text, contact info, WiFi, and more!</p>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="input-section">
+                <h3>📝 Enter Content</h3>
+                <div class="input-tabs">
+                    <button class="input-tab active" data-type="text">Text/URL</button>
+                    <button class="input-tab" data-type="wifi">WiFi</button>
+                    <button class="input-tab" data-type="contact">Contact</button>
+                    <button class="input-tab" data-type="phone">Phone</button>
+                    <button class="input-tab" data-type="email">Email</button>
+                </div>
+
+                <!-- Text/URL Input -->
+                <div class="input-content active" id="text-input">
+                    <div class="input-group">
+                        <label for="textInput">Enter text or URL:</label>
+                        <textarea id="textInput" placeholder="Enter your text or paste a URL here..."></textarea>
+                    </div>
+                </div>
+
+                <!-- WiFi Input -->
+                <div class="input-content" id="wifi-input">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="wifiSSID">Network Name (SSID):</label>
+                            <input type="text" id="wifiSSID" placeholder="Your WiFi network name">
+                        </div>
+                        <div class="input-group">
+                            <label for="wifiPassword">Password:</label>
+                            <input type="password" id="wifiPassword" placeholder="WiFi password">
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="wifiSecurity">Security Type:</label>
+                            <select id="wifiSecurity">
+                                <option value="WPA">WPA/WPA2/WPA3</option>
+                                <option value="WEP">WEP</option>
+                                <option value="nopass">No Password</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="wifiHidden">Hidden Network:</label>
+                            <input type="checkbox" id="wifiHidden">
+                            <span class="checkbox-text">Hidden network</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Input -->
+                <div class="input-content" id="contact-input">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="contactName">Full Name:</label>
+                            <input type="text" id="contactName" placeholder="John Doe">
+                        </div>
+                        <div class="input-group">
+                            <label for="contactPhone">Phone:</label>
+                            <input type="tel" id="contactPhone" placeholder="+1-555-123-4567">
+                        </div>
+                    </div>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="contactEmail">Email:</label>
+                            <input type="email" id="contactEmail" placeholder="john@example.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="contactCompany">Company:</label>
+                            <input type="text" id="contactCompany" placeholder="Company Name">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="contactAddress">Address:</label>
+                        <textarea id="contactAddress" placeholder="123 Main St, City, State, ZIP"></textarea>
+                    </div>
+                </div>
+
+                <!-- Phone Input -->
+                <div class="input-content" id="phone-input">
+                    <div class="input-group">
+                        <label for="phoneNumber">Phone Number:</label>
+                        <input type="tel" id="phoneNumber" placeholder="5551234567 (auto-formats as you type)">
+                        <small class="input-hint">Just type the numbers - formatting is automatic!</small>
+                    </div>
+                </div>
+
+                <!-- Email Input -->
+                <div class="input-content" id="email-input">
+                    <div class="input-row">
+                        <div class="input-group">
+                            <label for="emailAddress">Email Address:</label>
+                            <input type="email" id="emailAddress" placeholder="recipient@example.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="emailSubject">Subject:</label>
+                            <input type="text" id="emailSubject" placeholder="Email subject">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="emailBody">Message Body:</label>
+                        <textarea id="emailBody" placeholder="Your email message here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QR Code Display -->
+            <div class="qr-display-section">
+                <h3>📱 Generated QR Code</h3>
+                <div class="qr-container">
+                    <div class="qr-placeholder" id="qrPlaceholder">
+                        <span class="placeholder-icon">📱</span>
+                        <p>Enter content above to generate your QR code</p>
+                    </div>
+                    <canvas id="qrCanvas" style="display: none;"></canvas>
+                </div>
+                
+                <!-- QR Code Actions -->
+                <div class="qr-actions" id="qrActions" style="display: none;">
+                    <button id="downloadBtn" class="download-btn">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">Download QR Code</span>
+                    </button>
+                    <button id="shareBtn" class="share-btn">
+                        <span class="btn-icon">📤</span>
+                        <span class="btn-text">Share</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Customization Options -->
+            <div class="customization-section">
+                <h3>🎨 Customize QR Code</h3>
+                <div class="options-grid">
+                    <div class="option-group">
+                        <label for="qrSize">Size:</label>
+                        <input type="range" id="qrSize" min="128" max="512" value="256" step="32">
+                        <span class="option-value" id="sizeValue">256px</span>
+                    </div>
+                    <div class="option-group">
+                        <label for="qrForeground">Foreground Color:</label>
+                        <input type="color" id="qrForeground" value="#000000">
+                    </div>
+                    <div class="option-group">
+                        <label for="qrBackground">Background Color:</label>
+                        <input type="color" id="qrBackground" value="#FFFFFF">
+                    </div>
+                    <div class="option-group">
+                        <label for="qrErrorCorrection">Error Correction:</label>
+                        <select id="qrErrorCorrection">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">Quartile (25%)</option>
+                            <option value="H">High (30%)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="generate-section">
+                    <button id="generateBtn" class="generate-btn">
+                        <span class="btn-icon">🔗</span>
+                        <span class="btn-text">Generate QR Code</span>
+                        <span class="btn-spinner" style="display: none;">⚡</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- QR Code History -->
+            <div class="history-section">
+                <div class="history-header">
+                    <h3>📚 Recent QR Codes</h3>
+                    <button id="clearHistoryBtn" class="clear-btn">🗑️ Clear History</button>
+                </div>
+                <div class="qr-history" id="qrHistory">
+                    <p class="no-history">No QR codes generated yet. Generate your first QR code above!</p>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="tips-section">
+                <h3>💡 QR Code Tips</h3>
+                <div class="tips-grid">
+                    <div class="tip-item">
+                        <span class="tip-icon">📱</span>
+                        <p>Test your QR code by scanning it with your phone</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">🎨</span>
+                        <p>Use high contrast colors for better scanning</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">📏</span>
+                        <p>Larger QR codes are easier to scan from a distance</p>
+                    </div>
+                    <div class="tip-item">
+                        <span class="tip-icon">🔒</span>
+                        <p>Higher error correction allows for logo overlays</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>&copy; 2025 QR Code Generator. Made with ❤️ for easy sharing!</p>
+        </footer>
+    </div>
+
+    <!-- External JavaScript libraries -->
+    <!-- jQuery for DOM manipulation and AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- jQuery QR Code plugin for generating QR codes -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
