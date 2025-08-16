@@ -72,6 +72,11 @@ class QRCodeGenerator {
             this.formatPhoneNumber(e.target);
         });
 
+        // Contact phone number formatting
+        this.contactPhone.addEventListener('input', (e) => {
+            this.formatPhoneNumber(e.target);
+        });
+
         // Generate button
         this.generateBtn.addEventListener('click', () => {
             this.generateQRCode();
